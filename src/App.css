@@ -1,38 +1,198 @@
-.App {
-  text-align: center;
+body {
+  background-color: #ffffff;
+  max-width: 1920px;
+}
+html {
+  font-size: 62.5%;
+}
+input {
+  border: none;
+  outline: none;
+  color: var(--primary);
+  font-size: 1.6rem;
 }
 
-.App-logo {
-  height: 40vmin;
+textarea {
+  resize: none;
+  outline: none;
+  font-size: 1.6rem;
+  color: var(--primary);
+  padding-top: 4rem !important;
+  font-family: inherit;
+}
+
+button {
+  outline: none;
+  border: none;
+}
+a {
+  text-decoration: none;
+}
+label {
+  cursor: unset;
+  /* font-size: 1.6rem; */
+}
+:root {
+  --primary: #041967;
+  --border-line: #d6deed;
+  --blue-color: #008dff;
+  --white-color: #ffffff;
+  --grey-color: #f9f9f9;
+  --grey-desc: #3b3b3b;
+  --secondary-color: #041967;
+  --grey-color--2: #c4c4c4;
+}
+
+.register {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 70px;
+}
+.register .register__logo {
+}
+.register .register__content {
+  margin: 0 342px 0;
+}
+
+.register .register__content .register__title {
+  margin: 100px 0 72px 0;
+  font-size: 2rem;
+  color: var(--primary);
+  font-weight: 400;
+}
+.register .register__content .owner {
+  color: var(--blue-color);
+  font-size: 1.6rem;
+  margin: 36px 0 28px 0;
+  font-weight: 600;
+}
+.wrapper-personal .register__input,
+.wrapper-company .register__input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border-line);
+  padding: 16px 0px;
+  position: relative;
+  transition: all 0.2s ease-in;
+}
+.wrapper-personal .register__input .register__input-item ,
+/* .wrapper-personal .register__input .register__icon, */
+.wrapper-company .register__input .register__input-item {
+  padding-top: 2rem;
+  border: none;
+  font-weight: 400;
+}
+
+.wrapper-personal .register__input .register__icon,
+.wrapper-company .register__input .register__icon {
+  width: 16px;
+  height: 16px;
+  margin-right: 1.4rem;
+}
+
+.register__eyes {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.wrapper-form .wrapper-btn {
+  margin: 40px 0 48px 0;
+}
+
+.register__label {
+  position: absolute;
+  left: 3rem;
+  font-size: 1.6rem;
   pointer-events: none;
+  color: var(--grey-desc);
+  transition: all 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms,
+    max-width 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+}
+.register__input-item:not(:placeholder-shown) + .register__label,
+.register__input-item:focus + .register__label {
+  /* color: red; */
+  font-size: 1.3rem;
+  transform: translateY(-1.5rem);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* .register__label {
+} */
+
+.wrapper-form .wrapper-btn button {
+  color: var(--white-color);
+  font-size: 1.6rem;
+  background-color: var(--primary);
+  width: 100%;
+  padding: 15px 117px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+.wrapper-form .wrapper-btn button:hover {
+  cursor: pointer;
+  opacity: 0.9;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.wrapper-form .navigate-login {
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.wrapper-form .navigate-login p {
+  padding-right: 5px;
+}
+.wrapper-form .navigate-login span a {
+  color: var(--blue-color);
+}
+.wrapper-form .register-copyright {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 6.6rem;
+}
+.register .register__image {
+  width: 855px;
+  background-color: var(--grey-color);
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  border-radius: 10px;
+  margin-right: 7rem;
+}
+.register .register__image .wrapper-image {
+  margin: 170px 0 155px;
+}
+.register .register__image .register__image__tracking {
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--blue-color);
+}
+.register .register__image .register__image__description {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--grey-desc);
+  /* margin-bottom: 7.2rem; */
+}
+.register .register__image .wrapper-dot {
+  display: flex;
+  margin: 1.8rem 0 3.5rem;
 }
 
-.App-link {
-  color: #61dafb;
+.register .register__image .wrapper-dot .register-dot {
+  background-color: var(--grey-color--2);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.register .register__image .wrapper-dot .register-dot:hover {
+  cursor: pointer;
+  background-color: var(--secondary-color);
 }
