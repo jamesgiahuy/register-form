@@ -50,8 +50,7 @@ label {
   margin-top: 70px;
   padding: 0 4rem;
 }
-.register .register__logo {
-}
+
 .register .register__content {
   width: 312px;
   margin: 0 auto;
@@ -278,6 +277,15 @@ label {
   .register .register__image {
     width: 100%;
   }
+  .container-slider {
+    width: 100%;
+  }
+  .wrap-image__title {
+    max-width: 360px;
+  }
+  .register .register__content .register__logo {
+    margin-top: 50px;
+  }
 }
 
 /* Tablet : width >= 740px and width < 1024px */
@@ -293,8 +301,4 @@ label {
   .register .register__image {
     width: 100%;
   }
-}
-
-.slider {
-  color: red;
 }
