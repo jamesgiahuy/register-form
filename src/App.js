@@ -3,10 +3,13 @@ import "./App.css";
 import InputForm from "./InputForm";
 import Textarea from "./Textarea";
 import Slider from "./Slider";
+import { Link, Route, Routes } from "react-router-dom";
+import Register from "./Page/Register/Register";
+import Login from "./Page/Login/Login";
 function App() {
   return (
     <div className="register">
-      <div className="wrap-register__content">
+      {/* <div className="wrap-register__content">
         <div className="register__content">
           <div className="register__logo">
             <img src="./images/image6.svg" alt="#" />
@@ -86,8 +89,11 @@ function App() {
             </div>
           </div>
         </div>
-      </div>
-
+      </div> */}
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
       <div className="register__image">
         <div className="wrap-register__image">
           <Slider />

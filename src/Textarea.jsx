@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputForm = (props) => {
+const Textarea = (props) => {
   const { img, placeholder, eyes, type, id } = props;
 
   return (
@@ -22,4 +22,4 @@ const InputForm = (props) => {
   );
 };
 
-export default InputForm;
+export default Textarea;
