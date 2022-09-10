@@ -3,10 +3,15 @@ import InputForm from "../../InputForm";
 import Textarea from "../../Textarea";
 import { Link } from "react-router-dom";
 const Register = () => {
+  const registerHandle = () => {
+    const registerElement = document.querySelector(".register");
+    console.log(registerElement);
+    registerElement.classList.add("fixFlex");
+  };
   return (
     <div className="wrap-register__content">
       <div className="register__content">
-        <div className="register__logo">
+        <div className="register__logo login">
           <img src="./images/image6.svg" alt="#" />
         </div>
 
@@ -76,7 +81,9 @@ const Register = () => {
           <div className="navigate-login">
             <p>I have an account.</p>
             <span>
-              <Link to="/login">Login Now.</Link>
+              <Link to="/login" onClick={registerHandle}>
+                Login Now.
+              </Link>
             </span>
           </div>
           <div className="register-copyright">

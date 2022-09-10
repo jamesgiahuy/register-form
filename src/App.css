@@ -58,6 +58,22 @@ label {
 .wrap-register__content {
   width: 50%;
 }
+/* login */
+/* .wrap-register__content.login {
+  margin-top: -70px;
+} */
+.fixFlex {
+  align-items: flex-start;
+}
+.register__logo.login {
+  margin-bottom: 131px;
+}
+.wrapper-form .navigate-login.mb {
+  margin-bottom: 109px;
+}
+
+/* login */
+
 .wrap-register__image {
   /* width: 855px; */
   display: flex;
@@ -164,7 +180,7 @@ label {
   display: flex;
   align-items: center;
   font-size: 1.6rem;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: 20px;
   justify-content: center;
 }
