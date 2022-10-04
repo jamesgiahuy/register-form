@@ -2,47 +2,30 @@ import React from "react";
 import style from "./Table.module.scss";
 import clsx from "clsx";
 import { useEffect } from "react";
-import { getAllUsers } from "../../redux/apiRequest";
+import { getAllUsers, getUserDetail } from "../../redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import data from "../../data";
-import axios from "axios";
-import jwt from "jwt-decode";
-import jwtDecode from "jwt-decode";
 import ListItem from "./ListItem";
 
 const Table = () => {
   const user = useSelector((state) => state.auth.login?.currentUser); //selector lấy user từ login trả về trong đó có accesstoken
   const allUsers = useSelector((state) => state.users.users.allUsers);
+  const access_token = localStorage.getItem("access_token");
   const listUser = allUsers?.data;
-  console.log(listUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
     // kiểm tra có user
-    const access_token = localStorage.getItem("access_token");
-    console.log(access_token);
     if (!access_token) {
       navigate("/");
     }
     if (access_token) {
-      getAllUsers(access_token, dispatch); // đã lưu vào trong srote , lấy nó ra bằng useSelectorc
+      getAllUsers(access_token, dispatch); // đã lưu vào trong srote , lấy nó ra bằng useSelector
     }
   }, []);
-  // axiosJWT.interceptors.request.use(
-  //   async(config) =>{
-  //     let date =new Date();
-  //     const decodedToken = jwtDecode(user.data.access_token);
-  //     if (decodedToken.exp < date.getTime()/1000)
 
-  //   }
-
-  const classes = clsx(style.item0px);
   const classtableHead = clsx(style.thead, style.theadStyle);
-  const classOutForDeli = clsx(style.item100px, style.outForDeli);
-  const classPatientName = clsx(style.item200px, style.patientName);
-  const classReadyToPick = clsx(style.item100px, style.readyToPick);
-  const classblue = clsx(style.item100px, style.blueColor);
 
   return (
     <div className={style.tableWrap}>
@@ -64,14 +47,18 @@ const Table = () => {
         </ul>
       </div>
       <div className={style.tbody}>
-        {listUser?.map((user) => (
-          <ListItem
-            status={user.stage_name}
-            key={user.id}
-            destination={user.destination.full_address}
-            patient={user.store.name}
-          />
-        ))}
+        {listUser?.map((user, index) => {
+          return (
+            <ListItem
+              status={user.stage_name}
+              key={user.id}
+              destination={user.destination.full_address}
+              patient={user.store.name}
+              access_token={access_token}
+              id={user.id}
+            />
+          );
+        })}
         {/* <ul className={style.theadWrap}>
           <div className={classOutForDeli}>
             <span>Out For Delivery</span>
