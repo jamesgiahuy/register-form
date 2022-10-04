@@ -1,0 +1,17 @@
+.btnOrderSidebar {
+  display: inline-block;
+  background-color: #041967;
+  padding: 15px 33px;
+  border-radius: 12px;
+  margin-top: 32px;
+  span {
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 19.36px;
+    color: #ffffff;
+  }
+}
+.btnFooter {
+  display: flex;
+  justify-content: flex-end;
+}

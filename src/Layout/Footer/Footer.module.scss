@@ -1,0 +1,34 @@
+.footerWrap {
+  padding: 0 60px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .numberPageWrap {
+    display: flex;
+    gap: 16px;
+  }
+  select {
+    border: 2px solid #d6deed;
+    outline: none;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    option {
+      padding: 12px 16px;
+    }
+  }
+  .numberPage {
+    padding: 15px;
+    border: 1px #d6deed solid;
+    border-radius: 12px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    cursor: pointer;
+    text-align: center;
+    width: 43px;
+  }
+  img {
+    display: inline;
+  }
+}

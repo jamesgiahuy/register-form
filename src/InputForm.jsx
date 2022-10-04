@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 
 const InputForm = (props) => {
-  const { img, placeholder, eyes, type, id } = props;
-  console.log(eyes);
+  const { img, placeholder, eyes, type, id, onAddForm } = props;
+  const [input, setInput] = useState("");
+
+  const handleOnchange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddForm(input);
+  };
   return (
     <div className="register__input">
       <span className="register__icon">
-        <img src={img} />
+        <img src={img} alt="" />
       </span>
 
       <input
@@ -14,12 +23,14 @@ const InputForm = (props) => {
         type={type}
         id={id}
         placeholder=" "
+        value={input}
+        onChange={handleOnchange}
       />
-      <label for={id} className="register__label">
+      <label htmlFor={id} className="register__label">
         {placeholder}
       </label>
       <span className="register__icon register__eyes">
-        <img src={eyes} />
+        <img src={eyes} alt="" />
       </span>
     </div>
   );

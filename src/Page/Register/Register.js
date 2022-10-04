@@ -2,12 +2,15 @@ import React from "react";
 import InputForm from "../../InputForm";
 import Textarea from "../../Textarea";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 const Register = () => {
-  const registerHandle = () => {
+  useEffect(() => {
+    localStorage.setItem("fix", "fixFlex");
+    const fixFlex = localStorage.getItem("fix");
     const registerElement = document.querySelector(".register");
-    console.log(registerElement);
-    registerElement.classList.add("fixFlex");
-  };
+    registerElement.classList.remove(fixFlex);
+  });
+
   return (
     <div className="wrap-register__content">
       <div className="register__content">
@@ -81,9 +84,7 @@ const Register = () => {
           <div className="navigate-login">
             <p>I have an account.</p>
             <span>
-              <Link to="/login" onClick={registerHandle}>
-                Login Now.
-              </Link>
+              <Link to="/">Login Now.</Link>
             </span>
           </div>
           <div className="register-copyright">

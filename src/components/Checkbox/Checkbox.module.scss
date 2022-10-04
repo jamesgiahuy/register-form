@@ -1,0 +1,14 @@
+.checkBoxwrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  .labelCheckbox {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #3b3b3b;
+  }
+  .orderCheckbox {
+    width: 18px;
+    height: 18px;
+  }
+}

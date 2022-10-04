@@ -1,0 +1,62 @@
+.headerWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem 6rem 4rem;
+  border-bottom: 1px solid #d6deed;
+}
+
+.wrapWelcome {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  .welcome {
+    font-size: 1.6rem;
+    color: #3b3b3b;
+    font-weight: 600;
+  }
+  .morning {
+    font-size: 3rem;
+    line-height: 36.31px;
+    font-weight: 500;
+    color: #041967;
+  }
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  font-weight: 600;
+  span {
+    font-size: 1.6rem;
+    .colorAdd {
+      color: #008dff;
+    }
+  }
+}
+
+.noti {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  .avaWrap {
+    width: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .ava {
+    font-size: 1.6rem;
+    color: #008dff;
+    font-weight: 500;
+  }
+  .admin {
+    font-size: 11px;
+    font-weight: 600;
+  }
+}

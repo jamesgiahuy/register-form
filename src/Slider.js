@@ -25,6 +25,7 @@ const Slider = (props) => {
         return (
           <div
             className={slideIndex === index + 1 ? "slide active-anim" : "slide"}
+            key={index}
           >
             <img src={`/images/slider_image${index + 1}.svg`} alt={item.name} />
           </div>
@@ -33,6 +34,7 @@ const Slider = (props) => {
       {data.map((item, index) => {
         return (
           <div
+            key={index}
             className={
               slideIndex === index + 1
                 ? "wrap-image__title active-title"
@@ -47,6 +49,7 @@ const Slider = (props) => {
       <div className="wrapper-dot">
         {Array.from({ length: 3 }).map((item, index) => (
           <div
+            key={index}
             onClick={() => {
               moveDot(index + 1);
             }}

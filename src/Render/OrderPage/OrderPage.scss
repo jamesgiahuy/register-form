@@ -1,0 +1,19 @@
+.wrapper {
+  width: 100%;
+  max-width: 2214px;
+  min-height: 1615px;
+  margin: 70px auto;
+  background-color: #ffffff;
+  border-radius: 20px;
+  display: flex;
+  border: 1px solid #d6deed;
+}
+
+.container {
+  max-width: 1924px;
+  padding: 6rem;
+}
+.fixWidth {
+  max-width: 1786px;
+  width: 100%;
+}

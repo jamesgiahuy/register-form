@@ -1,0 +1,65 @@
+.labelInputWrap {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #d6deed;
+  max-width: 386px;
+  width: 100%;
+  margin-bottom: 16px;
+  position: relative;
+  img {
+    position: absolute;
+  }
+  label {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #3b3b3b;
+    padding-top: 12px;
+    line-height: 28px;
+  }
+  input {
+    border: none;
+    padding: 4px 0 10px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #041967;
+    background-color: #fffbf5;
+    line-height: 28px;
+  }
+  .nonactive {
+    display: none;
+  }
+  .active {
+    display: inline-block;
+  }
+}
+.labelInputWrap2 {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #d6deed;
+  max-width: 386px;
+  width: 100%;
+  margin-bottom: 16px;
+  position: relative;
+  img {
+    position: absolute;
+    right: 0;
+    bottom: 25%;
+    cursor: pointer;
+  }
+  label {
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #3b3b3b;
+    padding-top: 12px;
+    line-height: 28px;
+  }
+  input {
+    border: none;
+    padding: 4px 0 10px;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #041967;
+    background-color: #fffbf5;
+    line-height: 28px;
+  }
+}

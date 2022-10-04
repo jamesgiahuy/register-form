@@ -15,7 +15,7 @@ const Textarea = (props) => {
         id={id}
         placeholder=" "
       />
-      <label for={id} className="register__label">
+      <label htmlFor={id} className="register__label">
         {placeholder}
       </label>
     </div>
