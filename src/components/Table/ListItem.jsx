@@ -14,8 +14,6 @@ const ListItem = (props) => {
 
   const { destination, patient, status, access_token, id } = props;
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.detail.users?.detailUser);
-  const status_name = user?.data;
   // const { full_address } = user.destination;
   useEffect(() => {
     getUserDetail(access_token, dispatch, id);

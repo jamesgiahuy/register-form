@@ -9,12 +9,14 @@ import data from "../../data";
 import ListItem from "./ListItem";
 
 const Table = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const classtableHead = clsx(style.thead, style.theadStyle);
+
   const user = useSelector((state) => state.auth.login?.currentUser); //selector lấy user từ login trả về trong đó có accesstoken
   const allUsers = useSelector((state) => state.users.users.allUsers);
   const access_token = localStorage.getItem("access_token");
   const listUser = allUsers?.data;
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   useEffect(() => {
     // kiểm tra có user
     if (!access_token) {
@@ -24,8 +26,9 @@ const Table = () => {
       getAllUsers(access_token, dispatch); // đã lưu vào trong srote , lấy nó ra bằng useSelector
     }
   }, []);
-
-  const classtableHead = clsx(style.thead, style.theadStyle);
+  const userDetail = useSelector((state) => state.detail.users?.detailUser);
+  console.log(userDetail);
+  // const { status_name, full_address, delivery_distance } = userDetail?.data;
 
   return (
     <div className={style.tableWrap}>

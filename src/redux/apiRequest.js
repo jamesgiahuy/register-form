@@ -38,7 +38,6 @@ export const getAllUsers = async (acessToken, dispatch) => {
     dispatch(getUsersFailed());
   }
 };
-let n = 0;
 
 export const getUserDetail = async (acessToken, dispatch, id) => {
   dispatch(getDetailStart());
@@ -49,7 +48,6 @@ export const getUserDetail = async (acessToken, dispatch, id) => {
         headers: { AUTH_TOKEN: `${acessToken}` },
       }
     );
-    console.log(n++);
     dispatch(getDetailSuccess(res.data)); //gửi action và payload
   } catch (error) {
     // console.log(error);
