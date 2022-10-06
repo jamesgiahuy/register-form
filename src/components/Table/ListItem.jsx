@@ -1,23 +1,17 @@
-import React from "react";
+import React, { memo } from "react";
 import style from "./Table.module.scss";
 import clsx from "clsx";
-import { useEffect } from "react";
-import { getUserDetail } from "../../redux/apiRequest";
-import { useDispatch, useSelector } from "react-redux";
 const ListItem = (props) => {
   const classes = clsx(style.item0px);
-  const classtableHead = clsx(style.thead, style.theadStyle);
   const classOutForDeli = clsx(style.item100px, style.outForDeli);
   const classPatientName = clsx(style.item200px, style.patientName);
-  const classReadyToPick = clsx(style.item100px, style.readyToPick);
-  const classblue = clsx(style.item100px, style.blueColor);
+  // const classtableHead = clsx(style.thead, style.theadStyle);
+  // const classReadyToPick = clsx(style.item100px, style.readyToPick);
+  // const classblue = clsx(style.item100px, style.blueColor);
 
-  const { destination, patient, status, access_token, id } = props;
-  const dispatch = useDispatch();
-  // const { full_address } = user.destination;
-  useEffect(() => {
-    getUserDetail(access_token, dispatch, id);
-  }, []);
+  const { full_address, patient, status, access_token, delivery_distance } =
+    props;
+  console.log(status);
 
   return (
     <ul className={style.theadWrap}>
@@ -32,8 +26,8 @@ const ListItem = (props) => {
       <div className={style.item200px}>
         10/26/2021 <br /> 03:00 p
       </div>
-      <div className={style.item200px}>{destination}</div>
-      <div className={style.item100px}>5.0</div>
+      <div className={style.item200px}>{full_address}</div>
+      <div className={style.item100px}>{delivery_distance}</div>
       <div className={style.item100px}>7</div>
       <div className={style.item1000px}>
         <img src="/images/check.svg" />
@@ -57,4 +51,4 @@ const ListItem = (props) => {
   );
 };
 
-export default ListItem;
+export default memo(ListItem);
