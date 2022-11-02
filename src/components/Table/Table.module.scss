@@ -71,7 +71,7 @@
     // text-align: center;
   }
   .item0px {
-    width: 0px;
+    width: 10px;
   }
   .tbody {
     border: 1px solid #d6deed;
@@ -99,4 +99,8 @@
     border-radius: 50px;
     font-weight: 600;
   }
+}
+
+.dropdown-menu:hover {
+  background-color: red !important;
 }

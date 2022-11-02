@@ -9,22 +9,22 @@ import data from "../../data";
 import ListItem from "./ListItem";
 import { useState } from "react";
 import { useRef } from "react";
-
 const Table = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classtableHead = clsx(style.thead, style.theadStyle);
 
   const user = useSelector((state) => state.auth.login?.currentUser); //selector lấy user từ login trả về trong đó có accesstoken
-  const allUsers = useSelector((state) => state.users.users.allUsers);
+  const allUsers = useSelector((state) => state.users.users.allUsers); // mảng chứa các user
   const access_token = localStorage.getItem("access_token");
   const listUser = allUsers?.data;
+  console.log(listUser);
   const userDetail = useSelector((state) => state.detail.users?.detailUser);
-  const orderDetail = useRef([]);
-  if (userDetail) {
-    orderDetail.current.push(userDetail);
-  }
-  console.log(orderDetail.current);
+  // const orderDetail = useRef([]);
+  // if (userDetail) {
+  //   orderDetail.current.push(userDetail);
+  // }
+  // console.log(orderDetail.current);
   const { status_name } = userDetail?.data || {};
   const { full_address } = userDetail?.data.destination || {};
   useEffect(() => {
@@ -36,7 +36,6 @@ const Table = () => {
       getAllUsers(access_token, dispatch); // đã lưu vào trong srote , lấy nó ra bằng useSelector
     }
   }, []);
-
   useEffect(() => {
     listUser?.forEach((userDetail) =>
       getUserDetail(access_token, dispatch, userDetail.id)
@@ -62,14 +61,20 @@ const Table = () => {
         </ul>
       </div>
       <div className={style.tbody}>
-        {orderDetail.current?.map((user, index) => {
+        {listUser?.map((user, index) => {
+          const patient_name =
+            user.recipient.first_name + user.recipient.last_name;
           return (
             <ListItem
-              status={user.data.stage_name}
-              key={user.data.id}
-              delivery_distance={Math.floor(user.data.delivery_distance)}
-              full_address={user.data.destination.full_address}
-              patient={user.data.store.name}
+              status={user.status}
+              key={user.id}
+              delivery_distance={Math.floor(user.delivery_distance)}
+              full_address={user.destination.full_address}
+              patient={patient_name}
+              status_updated_at={user.status_updated_at}
+              pickup_start_time={user.pickup_start_time}
+              // quantity={user}
+              // id={user.id}
             />
           );
         })}
