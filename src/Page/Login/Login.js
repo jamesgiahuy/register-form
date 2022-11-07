@@ -62,7 +62,7 @@ const Login = () => {
                   className="register__input-item"
                   type="email"
                   id="email"
-                  placeholder=" "
+                  placeholder="phuongvo+rx123@mylong.io"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -81,7 +81,7 @@ const Login = () => {
                   className="register__input-item"
                   type="password"
                   id="password"
-                  placeholder=" "
+                  placeholder="Password1"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />

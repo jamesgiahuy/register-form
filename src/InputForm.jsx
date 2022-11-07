@@ -22,7 +22,7 @@ const InputForm = (props) => {
         className="register__input-item"
         type={type}
         id={id}
-        placeholder=" "
+        placeholder=""
         value={input}
         onChange={handleOnchange}
       />
