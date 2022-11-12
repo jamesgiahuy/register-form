@@ -15,7 +15,7 @@ const ListItem = (props) => {
   const {
     full_address,
     patient,
-    status,
+    status = "red",
     access_token,
     delivery_distance,
     quantity,
@@ -23,17 +23,16 @@ const ListItem = (props) => {
     status_updated_at,
     pickup_start_time,
   } = props;
-  console.log(quantity);
   return (
     <ul className={style.theadWrap}>
       <div
         className={classOutForDeli}
         style={{
-          color: ORDER_STATUSES[status].color,
-          border: `3px solid ${ORDER_STATUSES[status].color}`,
+          color: ORDER_STATUSES[status]?.color || {},
+          border: `3px solid ${ORDER_STATUSES[status]?.color}`,
         }}
       >
-        <span>{ORDER_STATUSES[status].text}</span>
+        <span>{ORDER_STATUSES[status]?.text}</span>
       </div>
       <div className={style.item100px}>
         {format(new Date(status_updated_at), `MM/dd/yy`)}

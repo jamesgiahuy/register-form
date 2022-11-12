@@ -2,8 +2,20 @@ import React from "react";
 import style from "./Main.module.scss";
 import { Link, Route, Routes } from "react-router-dom";
 import Input from "../FormInput";
+import { useState } from "react";
 
-const Main = () => {
+const Main = (props) => {
+  const { onSubmit, handlePageChange } = props;
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchTermChange = (e) => {
+    setSearchTerm(e.target.value);
+    if (!onSubmit) return;
+    const formValues = {
+      searchTerm: e.target.value,
+    };
+    onSubmit(formValues);
+  };
   return (
     <div className={style.mainWrap}>
       <h2>ORDERS</h2>
@@ -27,12 +39,16 @@ const Main = () => {
                 Search
               </label> */}
             </div>
-            <input
-              id="search"
-              type="text"
-              className={style.inputSearch}
-              placeholder="Search"
-            />
+            <form>
+              <input
+                id="search"
+                type="text"
+                className={style.inputSearch}
+                placeholder="Search"
+                value={searchTerm}
+                onChange={handleSearchTermChange}
+              />
+            </form>
             <div className={style.filterWrap}>
               <img src="/images/filter.svg" />
               <select className={style.orderFilter}>

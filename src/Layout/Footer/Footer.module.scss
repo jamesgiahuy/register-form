@@ -1,5 +1,5 @@
 .footerWrap {
-  padding: 0 60px 60px;
+  margin: 42px 0 60px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,8 +27,16 @@
     cursor: pointer;
     text-align: center;
     width: 43px;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background-color: rgb(0, 141, 255);
+      color: white;
+    }
   }
   img {
     display: inline;
   }
+}
+.numberPage.active {
+  background-color: rgb(0, 141, 255);
 }

@@ -23,18 +23,19 @@ export const loginUser = async (user, dispatch, navigate) => {
   }
 };
 
-export const getAllUsers = async (acessToken, dispatch) => {
+export const getAllUsers = async (acessToken, dispatch, paramsString) => {
   dispatch(getUsersStart());
   try {
     const res = await axios.get(
-      "https://rxdn-hub-qa.opusasia.io/api/v1/pharmacy/orders?page=10&start_date=1656835020000&end_date=1659513420000",
+      `https://rxdn-hub-qa.opusasia.io/api/v1/pharmacy/orders?page=10&start_date=1656835020000&end_date=1659513420000&${paramsString}`,
       {
         headers: { AUTH_TOKEN: `${acessToken}` },
       }
     );
+    console.log(res.data);
     dispatch(getUsersSuccess(res.data)); //gửi action và payload
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     dispatch(getUsersFailed());
   }
 };

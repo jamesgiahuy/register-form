@@ -1,15 +1,15 @@
 import React from "react";
 import style from "./Table.module.scss";
 import clsx from "clsx";
+import queryString from "query-string";
 import { useEffect } from "react";
 import { getAllUsers, getUserDetail } from "../../redux/apiRequest";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import data from "../../data";
 import ListItem from "./ListItem";
 import { useState } from "react";
-import { useRef } from "react";
-const Table = () => {
+import Footer from "../../Layout/Footer";
+const Table = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classtableHead = clsx(style.thead, style.theadStyle);
@@ -18,29 +18,70 @@ const Table = () => {
   const allUsers = useSelector((state) => state.users.users.allUsers); // mảng chứa các user
   const access_token = localStorage.getItem("access_token");
   const listUser = allUsers?.data;
-  console.log(listUser);
-  const userDetail = useSelector((state) => state.detail.users?.detailUser);
-  // const orderDetail = useRef([]);
-  // if (userDetail) {
-  //   orderDetail.current.push(userDetail);
-  // }
+  const metaData = allUsers?.metadata || {};
+
+  // console.log(listUser); // mảng chứa các user list
+  const { filters, setFilters, pagination, setPagination, searchTerm } = props;
   // console.log(orderDetail.current);
-  const { status_name } = userDetail?.data || {};
-  const { full_address } = userDetail?.data.destination || {};
+  // const { status_name } = userDetail?.data || {};
+  // const { full_address } = userDetail?.data.destination || {};
+  // const [pagination, setPagination] = useState({
+  //   count: 12525,
+  //   from: 1,
+  //   items: 10,
+  //   last: 1253,
+  //   limit: 10,
+  //   next: 2,
+  //   offset: 0,
+  //   outset: 0,
+  //   page: 1,
+  //   pages: 1253,
+  //   prev: null,
+  //   to: 10,
+  // });
+
+  // const [filters, setFilters] = useState({
+  //   count: 12525,
+  //   from: 1,
+  //   items: 10,
+  //   last: 1253,
+  //   limit: 10,
+  //   next: 2,
+  //   offset: 0,
+  //   outset: 0,
+  //   page: 1,
+  //   pages: 1253,
+  //   prev: null,
+  //   to: 10,
+  // });
+
+  // nhận về số trang mới
+  const handlePageChange = (newPage) => {
+    console.log(newPage);
+    setFilters({
+      ...metaData,
+      page: newPage,
+      external_id: searchTerm,
+    });
+  };
+
   useEffect(() => {
+    const paramsString = queryString.stringify(filters);
     // kiểm tra có user
     if (!access_token) {
       navigate("/");
     }
     if (access_token) {
-      getAllUsers(access_token, dispatch); // đã lưu vào trong srote , lấy nó ra bằng useSelector
+      getAllUsers(access_token, dispatch, paramsString); // đã lưu vào trong srote ,muốn  lấy nó ra  thì lấy bằng useSelector
+      setPagination(metaData);
     }
-  }, []);
-  useEffect(() => {
-    listUser?.forEach((userDetail) =>
-      getUserDetail(access_token, dispatch, userDetail.id)
-    );
-  }, [listUser]);
+  }, [filters]);
+  // useEffect(() => {
+  //   listUser?.forEach((userDetail) =>
+  //     getUserDetail(access_token, dispatch, userDetail.id)
+  //   );
+  // }, [listUser]);
+
   return (
     <div className={style.tableWrap}>
       <div className={classtableHead}>
@@ -78,349 +119,8 @@ const Table = () => {
             />
           );
         })}
-        {/* <ul className={style.theadWrap}>
-          <div className={classOutForDeli}>
-            <span>Out For Delivery</span>
-          </div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={classPatientName}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul>
-        <ul className={style.theadWrap}>
-          <div className={classReadyToPick}>Ready To Pick</div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul>
-        <ul className={style.theadWrap}>
-          <div className={classReadyToPick}>Ready To Ship</div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul>
-        <ul className={style.theadWrap}>
-          <div className={classOutForDeli}>Out For Delivery</div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul>
-        <ul className={style.theadWrap}>
-          <div className={classOutForDeli}>In Delivery</div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul>
-        <ul className={style.theadWrap}>
-          <div className={classReadyToPick}>Order Placed</div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul>
-        <ul className={style.theadWrap}>
-          <div className={classblue}>Ready To Pickup</div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul>
-        <ul className={style.theadWrap}>
-          <div className={classOutForDeli}>Out For Delivery</div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul>
-        <ul className={style.theadWrap}>
-          <div className={classblue}>Ready To Pickup</div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul>
-        <ul className={style.theadWrap}>
-          <div className={classReadyToPick}>Ready To Ship</div>
-          <div className={style.item100px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>Jacob Jones</div>
-          <div className={style.item200px}>(702) 555-0122</div>
-          <div className={style.item200px}>
-            10/26/2021 <br /> 03:00 p
-          </div>
-          <div className={style.item200px}>
-            2972 Westheimer Rd. Santa Ana, Illinois 85486
-          </div>
-          <div className={style.item100px}>5.0</div>
-          <div className={style.item100px}>7</div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/close.svg" />
-          </div>
-          <div className={style.item1000px}>
-            <img src="/images/check.svg" />
-          </div>
-          <div className={classes}>
-            <img src="/images/vertical.svg" />
-          </div>
-        </ul> */}
       </div>
+      <Footer pagination={metaData} onPageChange={handlePageChange} />
     </div>
   );
 };
